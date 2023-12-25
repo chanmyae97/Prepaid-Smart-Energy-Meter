@@ -1,12 +1,5 @@
 #include <EEPROM.h>
-void setup() {
-  writeStringToEEPROM(110, "2");
-  writeStringToEEPROM(120, "123456");
-  writeStringToEEPROM(140, "+959799447661");
-  writeStringToEEPROM(160, "+959778865138");
-}
-void loop() {
- }
+// Function to write a string to EEPROM
 void writeStringToEEPROM(int addrOffset, const String &strToWrite) {
   byte len = strToWrite.length();
   EEPROM.write(addrOffset, len);
@@ -14,8 +7,9 @@ void writeStringToEEPROM(int addrOffset, const String &strToWrite) {
     EEPROM.write(addrOffset + 1 + i, strToWrite[i]);
   }
 }
+// Function to read a string from EEPROM
 String readStringFromEEPROM(int addrOffset) {
-  int newStrLen = EEPROM.read (addrOffset);
+  int newStrLen = EEPROM.read(addrOffset);
   char data[newStrLen + 1];
   for (int i = 0; i < newStrLen; i++) {
     data[i] = EEPROM.read(addrOffset + 1 + i);
@@ -23,3 +17,14 @@ String readStringFromEEPROM(int addrOffset) {
   data[newStrLen] = '\0';
   return String(data);
 }
+void setup() {
+  // Initialize EEPROM with initial values
+  writeStringToEEPROM(110, "0");
+  writeStringToEEPROM(120, "123456");
+  writeStringToEEPROM(140, "+959799447661");
+  writeStringToEEPROM(160, "+959778865138");
+}
+
+void loop() {
+  }
+
